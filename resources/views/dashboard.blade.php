@@ -12,6 +12,9 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+            <div class="mt-5 p-5 bg-white overflow-hidden shadow-sm sm:rounded-lg ">
+                <a href="{{ route('about') }}" class="text-blue-500">Go To About</a>
+            </div>
         </div>
     </div>
 </x-app-layout>
