@@ -1,19 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-ctext dark:text-ctext-dark leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <!-- First Card -->
+            <div
+                class="overflow-hidden shadow-md dark:shadow-primary-dark sm:rounded-lg bg-background dark:bg-background-dark">
+
+                <div class="p-6 text-ctext dark:text-ctext-dark">
                     {{ __("You're logged in!") }}
                 </div>
             </div>
-            <div class="mt-5 p-5 bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-                <a href="{{ route('about') }}" class="text-blue-500">Go To About</a>
+
+            <!-- Second Card -->
+            <div>
+                <x-text-link :href="route('about')">
+                    {{ __('Go to About') }}
+                </x-text-link>
             </div>
         </div>
     </div>
