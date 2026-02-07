@@ -16,9 +16,6 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
         if (localStorage.getItem('theme') === 'dark') {
@@ -27,7 +24,6 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-
 </head>
 
 <body class="font-sans text-gray-900 antialiased">

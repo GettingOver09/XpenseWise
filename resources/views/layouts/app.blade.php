@@ -24,7 +24,6 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-
 </head>
 
 <body class="font-sans antialiased">

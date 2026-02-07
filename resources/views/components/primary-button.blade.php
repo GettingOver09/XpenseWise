@@ -5,7 +5,7 @@
                         bg-gray-800 dark:bg-gray-200 
                         border border-transparent 
                         rounded-md font-semibold text-xs 
-                        text-white dark:text-gray-900 uppercase tracking-widest 
+                        text-white dark:text-gray-900 uppercase tracking-widest
                         hover:bg-gray-700 dark:hover:bg-gray-300 
                         focus:bg-gray-700 dark:focus:bg-gray-400 
                         active:bg-gray-900 dark:active:bg-gray-500 

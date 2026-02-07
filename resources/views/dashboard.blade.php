@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-ctext dark:text-ctext-dark leading-tight">
             {{ __('Dashboard') }}
@@ -20,6 +22,7 @@
             <div>
                 <x-text-link :href="route('about')">
                     {{ __('Go to About') }}
+
                 </x-text-link>
             </div>
         </div>
