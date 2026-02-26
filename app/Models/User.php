@@ -13,19 +13,21 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    // Relationship: A user has many categories
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class);
+    }
+
     public function categories(): HasMany
     {
         return $this->hasMany(Category::class);
     }
 
-    // Relationship: A user has many expenses
-    public function expenses(): HasMany
+    public function transactions(): HasMany
     {
-        return $this->hasMany(Expense::class);
+        return $this->hasMany(Transaction::class);
     }
 
-    // Relationship: A user has many budgets
     public function budgets(): HasMany
     {
         return $this->hasMany(Budget::class);
@@ -40,6 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'default_currency',
+        'timezone',
     ];
 
     /**

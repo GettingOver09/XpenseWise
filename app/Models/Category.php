@@ -12,21 +12,40 @@ class Category extends Model
     protected $table = 'categories';
 
     // Define fillable fields for mass assignment
-    protected $fillable = ['user_id', 'name'];
+    protected $fillable = [
+        'user_id',
+        'name',
+        'type',
+        'parent_id',
+    ];
 
-    // Relationship: A category belongs to a user
+    protected function casts(): array
+    {
+        return [
+            'type' => 'string',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship: A category has many expenses
-    public function expenses(): HasMany
+    public function parent(): BelongsTo
     {
-        return $this->hasMany(Expense::class);
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    // Relationship: A category has many budgets
+    public function children(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function budgets(): HasMany
     {
         return $this->hasMany(Budget::class);
