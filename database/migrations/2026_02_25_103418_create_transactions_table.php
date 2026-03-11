@@ -34,18 +34,21 @@ return new class extends Migration
                 ->nullOnDelete();
             $table->index('category_id');
 
+            $table->uuid('transfer_group_id')->nullable()->index()
+                ->comment('UUID to link related transactions in a transfer');
+
             $table->decimal('amount', 19, 4)
                 ->comment('positive = income/credit, negative = expense/debit');
+
+            // currency snapshot
+            $table->char('currency', 3)
+                ->comment('ISO 4217 currency code snapshot at time of transaction');
 
             $table->string('type', 20);     // income, expense, transfer
 
             $table->text('description')->nullable();
 
             $table->dateTime('transaction_date')->index();
-
-            $table->string('status', 20)
-                ->default('cleared')
-                ->comment('pending, cleared, cancelled, failed, ...');
 
             // ── Composite indexes for common access patterns ───────
             // Dashboard / timeline (most frequent query pattern)

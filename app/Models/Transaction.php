@@ -14,11 +14,12 @@ class Transaction extends Model
         'user_id',
         'account_id',
         'category_id',
+        'transfer_group_id',
         'amount',
+        'currency',
         'type',
         'description',
         'transaction_date',
-        'status',
     ];
 
     protected function casts(): array

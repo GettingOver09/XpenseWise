@@ -21,6 +21,8 @@ return new class extends Migration
                 ->index()
                 ->after('user_id');
 
+            $table->string('icon', 8)->nullable()->after('type');
+
             $table->index('user_id');
         });
     }
@@ -34,7 +36,7 @@ return new class extends Migration
             $table->dropForeign(['parent_id']);
             $table->dropIndex(['parent_id']);
             $table->dropIndex(['user_id']);
-            $table->dropColumn(['parent_id', 'type']);
+            $table->dropColumn(['parent_id', 'type', 'icon']);
         });
     }
 };

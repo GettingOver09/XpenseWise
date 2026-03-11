@@ -21,9 +21,11 @@ return new class extends Migration
 
             $table->string('name', 100);
             $table->string('type', 30);           // cash, bank, credit, ewallet, investment, ...
+            $table->string('icon', 8)->nullable();
             $table->string('currency', 3)->default('PHP');
             $table->decimal('initial_balance', 19, 4)->default(0);
             $table->decimal('current_balance', 19, 4)->default(0);
+
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();

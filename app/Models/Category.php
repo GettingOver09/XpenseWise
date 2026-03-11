@@ -16,6 +16,7 @@ class Category extends Model
         'user_id',
         'name',
         'type',
+        'icon',
         'parent_id',
     ];
 

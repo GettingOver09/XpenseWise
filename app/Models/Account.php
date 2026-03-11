@@ -33,6 +33,7 @@ class Account extends Model
         'user_id',
         'name',
         'type',
+        'icon',
         'currency',
         'initial_balance',
         'current_balance',
