@@ -50,6 +50,8 @@ return new class extends Migration
                 ->default('cleared')
                 ->comment('pending, cleared, cancelled, failed, ...');
 
+            $table->text('merchant')->nullable();
+
             $table->text('description')->nullable();
 
             $table->dateTime('transaction_date')->index();

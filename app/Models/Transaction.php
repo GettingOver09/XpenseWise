@@ -19,6 +19,7 @@ class Transaction extends Model
         'currency',
         'type',
         'status',
+        'merchant',
         'description',
         'transaction_date',
     ];
