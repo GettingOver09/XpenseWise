@@ -46,6 +46,10 @@ return new class extends Migration
 
             $table->string('type', 20);     // income, expense, transfer
 
+            $table->string('status', 20)
+                ->default('cleared')
+                ->comment('pending, cleared, cancelled, failed, ...');
+
             $table->text('description')->nullable();
 
             $table->dateTime('transaction_date')->index();
