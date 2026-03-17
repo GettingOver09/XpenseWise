@@ -44,13 +44,14 @@ return new class extends Migration
             $table->char('currency', 3)
                 ->comment('ISO 4217 currency code snapshot at time of transaction');
 
-            $table->string('type', 20);     // income, expense, transfer
+            $table->text('payee')->nullable();
 
-            $table->string('status', 20)
-                ->default('cleared')
-                ->comment('pending, cleared, cancelled, failed, ...');
+            $table->enum('type', ['income', 'expense', 'transfer']);     // income, expense, transfer
 
-            $table->text('merchant')->nullable();
+            $table->enum('status', ["not reviewed", "reviewed"])
+                ->default('not reviewed')
+                ->comment('not reviewed, reviewed');
+
 
             $table->text('description')->nullable();
 

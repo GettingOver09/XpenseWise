@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->enum('type', ['income', 'expense'])->nullable()->after('name');
+            $table->enum('type', ['income', 'expense', 'transfer'])->after('name');
 
             $table->foreignId('parent_id')
                 ->nullable()
@@ -22,7 +22,6 @@ return new class extends Migration
                 ->after('user_id');
 
             $table->string('icon', 8)->nullable()->after('type');
-
             $table->index('user_id');
         });
     }

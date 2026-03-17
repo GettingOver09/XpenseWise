@@ -17,9 +17,9 @@ class Transaction extends Model
         'transfer_group_id',
         'amount',
         'currency',
+        'payee',
         'type',
         'status',
-        'merchant',
         'description',
         'transaction_date',
     ];

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->renameColumn('amount', 'limit_amount');
             $table->renameColumn('budget_month', 'month');
 
+            $table->unique(['user_id', 'category_id', 'month']);
+
             $table->index('user_id');
             $table->index('category_id');
         });
