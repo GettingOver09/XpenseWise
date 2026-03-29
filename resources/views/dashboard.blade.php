@@ -22,7 +22,6 @@
             <div>
                 <x-text-link :href="route('about')">
                     {{ __('Go to About') }}
-
                 </x-text-link>
             </div>
         </div>

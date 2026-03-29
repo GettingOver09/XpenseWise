@@ -20,7 +20,16 @@ return new class extends Migration
                 ->index();
 
             $table->string('name', 100);
-            $table->string('type', 30);           // cash, bank, credit, ewallet, investment, ...
+            $table->enum('type', [
+                'Cash',
+                'Bank Account',
+                'E-Wallet',
+                'Credit Card',
+                'Loan / Debt',
+                'Investment',
+                'Savings / Emergency Fund',
+                'Other'
+            ])->default('Cash');
             $table->string('icon', 8)->nullable();
             $table->string('currency', 3)->default('PHP');
             $table->decimal('initial_balance', 19, 4)->default(0);
