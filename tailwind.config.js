@@ -16,6 +16,14 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                background: "oklch(var(--color-background) / <alpha-value>)",
+                primary: "oklch(var(--color-primary) / <alpha-value>)",
+                secondary: "oklch(var(--color-secondary) / <alpha-value>)",
+                ctext: "oklch(var(--color-ctext) / <alpha-value>)",
+                muted: "oklch(var(--color-muted) / <alpha-value>)",
+            },
+            /*
+            colors: {
                 primary: {
                     DEFAULT: "#4f46e5",
                     dark: "#818cf8",
@@ -36,7 +44,7 @@ export default {
                     DEFAULT: "#6b7280",
                     dark: "#9ca3af",
                 },
-            },
+            },*/
         },
     },
 

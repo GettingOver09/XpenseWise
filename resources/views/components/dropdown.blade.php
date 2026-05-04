@@ -1,7 +1,7 @@
 @props([
     'align' => 'right',
     'width' => '48',
-    'contentClasses' => 'py-1 bg-background dark:bg-background-dark',
+    'contentClasses' => 'py-1 bg-background',
     'trigger',
     'content',
 ])

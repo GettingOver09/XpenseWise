@@ -2,7 +2,7 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-ctext dark:text-ctext-dark leading-tight">
+        <h2 class="font-semibold text-xl text-ctext leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -10,10 +10,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- First Card -->
-            <div
-                class="overflow-hidden shadow-md dark:shadow-primary-dark sm:rounded-lg bg-background dark:bg-background-dark">
+            <div class="overflow-hidden shadow-md sm:rounded-lg bg-background">
 
-                <div class="p-6 text-ctext dark:text-ctext-dark">
+                <div class="p-6 text-ctext">
                     {{ __("You're logged in!") }}
                 </div>
             </div>
