@@ -17,11 +17,11 @@
                     </x-nav-link>
                 </div>
 
-                <!-- New: Vue Dashboard -->
+                <!-- Vue Dashboard -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.vue')" :active="request()->routeIs('dashboard.vue')">
+                    <x-inertia-nav-link :href="route('dashboard.vue')" :active="request()->routeIs('dashboard.vue')">
                         Vue Dashboard
-                    </x-nav-link>
+                    </x-inertia-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
