@@ -2,37 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+/* prettier-ignore */
 :root {
-    --color-primary: #4f46e5;
-    --color-secondary: #ec4899;
-    --color-background: #ffffff;
-    --color-ctext: #1a1a1a;
-    --color-muted: #6b7280;
+    --color-primary: 44.38% 0.206 269.23;       /* #4f46e5 */
+    --color-secondary: 61.42% 0.222 344.2;      /* #ec4899 */
+    --color-background: 100% 0 0;               /* #ffffff */
+    --color-ctext: 18.52% 0 0;                  /* #1a1a1a */
+    --color-muted: 52.12% 0.027 253.37;         /* #6b7280 */
 }
 
+/* prettier-ignore */
 .dark {
-    --color-primary: #818cf8;
-    --color-secondary: #f472b6;
-    --color-background: #1a202c;
-    --color-ctext: #ffffff;
-    --color-muted: #9ca3af;
+    --color-primary: 66.59% 0.162 265.75;       /* #818cf8 */
+    --color-secondary: 68.32% 0.183 338.45;     /* #f472b6 */
+    --color-background: 25.48% 0.038 253.25;    /* #1a202c */
+    --color-ctext: 100% 0 0;                    /* #ffffff */
+    --color-muted: 70.83% 0.024 246.6;          /* #9ca3af */
 }
-*/
-
-:root {
-    --color-primary: 44.38% 0.206 269.23; /* #4f46e5 */
-    --color-secondary: 61.42% 0.222 344.2; /* #ec4899 */
-    --color-background: 100% 0 0; /* #ffffff */
-    --color-ctext: 18.52% 0 0; /* #1a1a1a */
-    --color-muted: 52.12% 0.027 253.37; /* #6b7280 */
-}
-
 /* When the 'dark' class is present on the <html> tag */
-.dark {
-    --color-primary: 66.59% 0.162 265.75; /* #818cf8 */
-    --color-secondary: 68.32% 0.183 338.45; /* #f472b6 */
-    --color-background: 25.48% 0.038 253.25; /* #1a202c */
-    --color-ctext: 100% 0 0; /* #ffffff */
-    --color-muted: 70.83% 0.024 246.6; /* #9ca3af */
-}
