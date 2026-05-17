@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{{-- resources\views\layouts\blade\app.blade.php --}}
+{{-- prettier-ignore --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{
-    theme: localStorage.getItem('theme') || 'light'
+theme: localStorage.getItem('theme') || 'light'
 }" x-init="$watch('theme', value => localStorage.setItem('theme', value))"
-    :class="{ 'dark': theme === 'dark' }">
+:class="{ 'dark': theme === 'dark' }">
 
 <head>
     <meta charset="utf-8">
