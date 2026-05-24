@@ -1,16 +1,22 @@
 <script setup>
 import { useThemeStore } from '@/stores/theme';
 import { Head } from '@inertiajs/vue3';
+import AppLayout from '../Layouts/AppLayout.vue';
 
 // Use Pinia (recommended for Vue)
 const themeStore = useThemeStore();
+
+defineOptions({
+    name: 'Dashboard',
+    layout: AppLayout,
+});
 </script>
 
 <template>
     <div class="min-h-screen bg-background text-ctext">
         <Head title="Dashboard" />
 
-        <div class="max-w-7xl mx-auto py-10 px-6">
+        <div class="mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-3xl font-bold text-ctext dark:text-white">
                     Dashboard
