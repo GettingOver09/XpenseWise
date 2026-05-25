@@ -11,25 +11,25 @@ const isActive = (href) => {
 </script>
 
 <template>
-    <aside class="w-64 min-h-screen border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <aside class="w-64 min-h-screen border-r border-gray-200 dark:border-gray-700 bg-background">
         <!-- Brand Logo -->
-        <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h1 class="text-xl font-bold text-gray-800 dark:text-white">
+        <div class="p-[18px] border-b border-muted/20 dark:border-gray-700">
+            <h1 class="text-xl font-bold text-ctext">
                 XpenseWise
             </h1>
         </div>
 
         <!-- Navigation -->
         <nav class="flex flex-col gap-2 p-4">
-             <Link
+            <Link
                 v-for="item in navigation"
                 :key="item.href"
                 :href="item.href"
                 class="px-4 py-3 rounded-lg transition"
                 :class="[
                     isActive(item.href)
-                        ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
-                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                        ? 'bg-gray-200 dark:bg-gray-700 text-ctext'
+                        : 'text-muted hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-ctext'
                 ]"
             >
                 {{ item.label }}

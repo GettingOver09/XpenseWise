@@ -30,19 +30,19 @@ const user = usePage().props.auth.user;
             </p>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-6">
+        <div class="bg-background border border-gray-200 dark:border-gray-700 shadow-sm rounded-2xl p-6">
             <UpdateProfileInformationForm :user="user" />
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-6">
+        <div class="bg-background border border-gray-200 dark:border-gray-700 shadow-sm rounded-2xl p-6">
             <UpdatePasswordForm />
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-6">
+        <div class="bg-background border border-gray-200 dark:border-gray-700 shadow-sm rounded-2xl p-6">
             <DarkModeToggle />
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-6">
+        <div class="bg-background border border-gray-200 dark:border-gray-700 shadow-sm rounded-2xl p-6">
             <DeleteUserForm />
         </div>
 

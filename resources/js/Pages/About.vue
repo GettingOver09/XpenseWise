@@ -10,7 +10,7 @@ defineOptions({
 <template>
     <Head title="About" />
 
-    <div class="mx-auto space-y-6">
+    <div class="mx-auto space-y-8">
 
         <!-- Page Header -->
         <div>
@@ -24,31 +24,29 @@ defineOptions({
         </div>
 
         <!-- Main Content -->
-        <div
-            class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6"
-        >
-            <h2 class="text-xl font-semibold text-ctext mb-4">
+        <div class="bg-background border border-gray-200 dark:border-gray-700 shadow-sm rounded-2xl p-8">
+            <h2 class="text-2xl font-semibold text-ctext mb-6">
                 Our Mission
             </h2>
 
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                We're dedicated to providing the best experience for our users.
+            <p class="text-muted leading-relaxed text-[17px]">
+                We're dedicated to helping individuals and families take control of their finances with a simple, powerful, and beautiful expense tracker.
             </p>
 
             <button
-                class="mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition"
+                class="mt-8 inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-xl hover:bg-primary/90 transition"
             >
                 Learn More
             </button>
         </div>
 
         <!-- Footer Navigation -->
-        <div>
+        <div class="pt-4">
             <Link
                 href="/dashboard"
-                class="text-primary hover:underline"
+                class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
             >
-                Back to Dashboard
+                ← Back to Dashboard
             </Link>
         </div>
 

@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
-const open = ref(false);
+const dropdownOpen = ref(false);
+const mobileMenuOpen = ref(false);
 
 const page = usePage();
-
 const user = page.props.auth?.user ?? {};
 
 const isActive = (path) => {
@@ -21,31 +21,59 @@ const isActive = (path) => {
                 <!-- LEFT -->
                 <div class="flex items-center gap-8">
 
+                    <!-- Logo -->
                     <Link
                         href="/dashboard"
                         class="text-xl font-bold text-ctext"
                     >
-                       Page Name
+                        XpenseWise
                     </Link>
-                
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center gap-4">
+
+                        <Link
+                            href="/dashboard"
+                            class="px-3 py-2 rounded-lg transition"
+                            :class="[
+                                isActive('/dashboard')
+                                    ? 'bg-gray-200 dark:bg-gray-700 text-ctext'
+                                    : 'text-muted hover:bg-gray-100 dark:hover:bg-gray-700'
+                            ]"
+                        >
+                            Dashboard
+                        </Link>
+
+                        <Link
+                            href="/about"
+                            class="px-3 py-2 rounded-lg transition"
+                            :class="[
+                                isActive('/about')
+                                    ? 'bg-gray-200 dark:bg-gray-700 text-ctext'
+                                    : 'text-muted hover:bg-gray-100 dark:hover:bg-gray-700'
+                            ]"
+                        >
+                            About
+                        </Link>
+
+                    </div>
                 </div>
 
-                <!-- RIGHT -->
+                <!-- RIGHT - Desktop User Dropdown -->
                 <div class="hidden md:flex items-center gap-4">
 
-                    <!-- User Dropdown -->
                     <div class="relative">
 
                         <button
-                            @click="open = !open"
+                            @click="dropdownOpen = !dropdownOpen"
                             class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                         >
-                            <span class="text-ctext">
+                            <span class="text-ctext font-medium">
                                 {{ user.name }}
                             </span>
 
                             <svg
-                                class="w-4 h-4"
+                                class="w-4 h-4 text-ctext"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -61,10 +89,10 @@ const isActive = (path) => {
 
                         <!-- Dropdown -->
                         <div
-                            v-if="open"
+                            v-if="dropdownOpen"
+                            @click="dropdownOpen = false"
                             class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50"
                         >
-
                             <Link
                                 href="/profile"
                                 class="block px-4 py-3 text-sm text-ctext hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -80,16 +108,15 @@ const isActive = (path) => {
                             >
                                 Log Out
                             </Link>
-
                         </div>
 
                     </div>
 
                 </div>
 
-                <!-- Mobile Button -->
+                <!-- Mobile Burger Button -->
                 <button
-                    @click="open = !open"
+                    @click="mobileMenuOpen = !mobileMenuOpen"
                     class="md:hidden flex items-center"
                 >
                     <svg
@@ -112,27 +139,29 @@ const isActive = (path) => {
 
         <!-- Mobile Menu -->
         <div
-            v-if="open"
+            v-if="mobileMenuOpen"
             class="md:hidden border-t border-gray-200 dark:border-gray-700 p-4 space-y-2"
         >
-
             <Link
                 href="/dashboard"
-                class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                class="block px-3 py-2 rounded-lg text-ctext hover:bg-gray-100 dark:hover:bg-gray-700"
+                @click="mobileMenuOpen = false"
             >
                 Dashboard
             </Link>
 
             <Link
                 href="/about"
-                class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                class="block px-3 py-2 rounded-lg text-ctext hover:bg-gray-100 dark:hover:bg-gray-700"
+                @click="mobileMenuOpen = false"
             >
                 About
             </Link>
 
             <Link
                 href="/profile"
-                class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                class="block px-3 py-2 rounded-lg text-ctext hover:bg-gray-100 dark:hover:bg-gray-700"
+                @click="mobileMenuOpen = false"
             >
                 Profile
             </Link>
@@ -142,10 +171,10 @@ const isActive = (path) => {
                 method="post"
                 as="button"
                 class="block w-full text-left px-3 py-2 rounded-lg text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                @click="mobileMenuOpen = false"
             >
                 Logout
             </Link>
-
         </div>
     </nav>
 </template>

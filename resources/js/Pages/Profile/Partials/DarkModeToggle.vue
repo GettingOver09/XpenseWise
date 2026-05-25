@@ -9,17 +9,16 @@ const themeStore = useThemeStore();
 
         <header>
             <h2 class="text-lg font-medium text-ctext">
-                Dark Mode
+                Appearance
             </h2>
 
             <p class="mt-1 text-sm text-muted">
-                Toggle dark mode on or off.
+                Toggle between light and dark mode.
             </p>
         </header>
 
-        <div class="mt-5">
+        <div class="mt-6 flex items-center gap-4">
             <label class="relative flex items-center cursor-pointer">
-
                 <input
                     type="checkbox"
                     class="sr-only peer"
@@ -27,15 +26,14 @@ const themeStore = useThemeStore();
                     @change="themeStore.toggleTheme()"
                 >
 
-                <div
-                    class="w-12 h-6 bg-gray-300 rounded-full transition peer-checked:bg-blue-600"
-                />
+                <div class="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full peer peer-checked:bg-primary transition-colors" />
 
-                <div
-                    class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-6"
-                />
-
+                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-all peer-checked:translate-x-6" />
             </label>
+
+            <span class="text-sm text-ctext font-medium">
+                {{ themeStore.theme === 'dark' ? 'Dark Mode' : 'Light Mode' }}
+            </span>
         </div>
 
     </section>

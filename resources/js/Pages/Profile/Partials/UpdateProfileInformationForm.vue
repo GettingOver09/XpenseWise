@@ -41,7 +41,7 @@ const submit = () => {
                 <input
                     v-model="form.name"
                     type="text"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
+                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
                 >
 
                 <p
@@ -60,7 +60,7 @@ const submit = () => {
                 <input
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
+                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
                 >
 
                 <p
@@ -74,9 +74,9 @@ const submit = () => {
             <button
                 type="submit"
                 :disabled="form.processing"
-                class="px-4 py-2 bg-primary text-white rounded-lg"
+                class="px-3 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
             >
-                Save
+                Save Changes
             </button>
 
         </form>

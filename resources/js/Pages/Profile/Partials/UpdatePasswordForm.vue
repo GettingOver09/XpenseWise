@@ -32,33 +32,45 @@ const submit = () => {
             class="mt-6 space-y-6"
         >
 
-            <input
-                v-model="form.current_password"
-                type="password"
-                placeholder="Current Password"
-                class="block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
-            >
+            <div>
+                <label class="block text-sm font-medium text-ctext">
+                    Current Password
+                </label>
+                <input
+                    v-model="form.current_password"
+                    type="password"
+                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
+                >
+            </div>
 
-            <input
-                v-model="form.password"
-                type="password"
-                placeholder="New Password"
-                class="block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
-            >
+            <div>
+                <label class="block text-sm font-medium text-ctext">
+                    New Password
+                </label>
+                <input
+                    v-model="form.password"
+                    type="password"
+                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
+                >
+            </div>
 
-            <input
-                v-model="form.password_confirmation"
-                type="password"
-                placeholder="Confirm Password"
-                class="block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
-            >
+            <div>
+                <label class="block text-sm font-medium text-ctext">
+                    Confirm New Password
+                </label>
+                <input
+                    v-model="form.password_confirmation"
+                    type="password"
+                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
+                >
+            </div>
 
             <button
                 type="submit"
                 :disabled="form.processing"
-                class="px-4 py-2 bg-primary text-white rounded-lg"
+                class="px-5 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
             >
-                Save
+                Update Password
             </button>
 
         </form>

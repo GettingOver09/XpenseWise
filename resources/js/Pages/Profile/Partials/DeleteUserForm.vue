@@ -24,13 +24,13 @@ const deleteAccount = () => {
             </h2>
 
             <p class="mt-1 text-sm text-muted">
-                Permanently delete your account and data.
+                Permanently delete your account and all associated data.
             </p>
         </header>
 
         <button
             @click="showModal = true"
-            class="mt-6 px-4 py-2 bg-red-500 text-white rounded-lg"
+            class="mt-6 px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition"
         >
             Delete Account
         </button>
@@ -40,46 +40,41 @@ const deleteAccount = () => {
             v-if="showModal"
             class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
         >
-
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md"
-            >
-
+            <div class="bg-background border border-gray-200 dark:border-gray-700 rounded-2xl p-6 w-full max-w-md shadow-xl">
+                
                 <h3 class="text-lg font-semibold text-ctext">
-                    Confirm Deletion
+                    Confirm Account Deletion
                 </h3>
 
                 <p class="mt-2 text-sm text-muted">
-                    Enter your password to confirm.
+                    This action cannot be undone. Please enter your password to confirm.
                 </p>
 
                 <input
                     v-model="form.password"
                     type="password"
-                    placeholder="Password"
-                    class="mt-4 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700"
+                    placeholder="Enter your password"
+                    class="mt-4 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-red-500 focus:ring-red-500"
                 >
 
                 <div class="mt-6 flex justify-end gap-3">
-
                     <button
                         @click="showModal = false"
-                        class="px-4 py-2 rounded-lg border"
+                        class="px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-ctext hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                     >
                         Cancel
                     </button>
 
                     <button
                         @click="deleteAccount"
-                        class="px-4 py-2 bg-red-500 text-white rounded-lg"
+                        :disabled="form.processing"
+                        class="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition"
                     >
-                        Delete
+                        Yes, Delete Account
                     </button>
-
                 </div>
 
             </div>
-
         </div>
 
     </section>
