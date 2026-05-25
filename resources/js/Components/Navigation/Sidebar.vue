@@ -8,6 +8,13 @@ const page = usePage();
 const isActive = (href) => {
     return page.url === href;
 };
+
+const itemClasses = (item) => ([
+    'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition',
+    item.href && isActive(item.href)
+        ? 'bg-gray-200 text-ctext dark:bg-gray-700'
+        : 'text-muted hover:bg-gray-100 hover:text-ctext dark:hover:bg-gray-700',
+]);
 </script>
 
 <template>
@@ -21,19 +28,37 @@ const isActive = (href) => {
 
         <!-- Navigation -->
         <nav class="flex flex-col gap-2 p-4">
-            <Link
+            <div
                 v-for="item in navigation"
-                :key="item.href"
-                :href="item.href"
-                class="px-4 py-3 rounded-lg transition"
-                :class="[
-                    isActive(item.href)
-                        ? 'bg-gray-200 dark:bg-gray-700 text-ctext'
-                        : 'text-muted hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-ctext'
-                ]"
+                :key="item.label"
+                :class="{ 'mt-6 border-t border-muted/20 pt-6 dark:border-gray-700': item.spacerBefore }"
             >
-                {{ item.label }}
-            </Link>
+                <Link
+                    v-if="item.href"
+                    :href="item.href"
+                    :class="itemClasses(item)"
+                >
+                    <component
+                        :is="item.icon"
+                        class="shrink-0"
+                        size="22"
+                    />
+                    <span>{{ item.label }}</span>
+                </Link>
+
+                <button
+                    v-else
+                    type="button"
+                    :class="itemClasses(item)"
+                >
+                    <component
+                        :is="item.icon"
+                        class="shrink-0"
+                        size="22"
+                    />
+                    <span>{{ item.label }}</span>
+                </button>
+            </div>
         </nav>
     </aside>
 </template>

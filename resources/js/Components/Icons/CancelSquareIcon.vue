@@ -1,0 +1,47 @@
+<script setup>
+import { computed } from 'vue';
+
+defineOptions({
+    name: 'CancelSquareIcon',
+});
+
+const props = defineProps({
+    size: {
+        type: [Number, String],
+        default: 24,
+    },
+    color: {
+        type: String,
+        default: 'currentColor',
+    },
+    title: {
+        type: String,
+        default: '',
+    },
+});
+
+const normalizedSize = computed(() => (
+    typeof props.size === 'number' ? String(props.size) : props.size
+));
+
+const iconStyle = computed(() => ({
+    color: props.color,
+}));
+</script>
+
+<template>
+    <svg
+        :width="normalizedSize"
+        :height="normalizedSize"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        :style="iconStyle"
+        :aria-hidden="title ? undefined : true"
+        :role="title ? 'img' : undefined"
+    >
+        <title v-if="title">{{ title }}</title>
+        <path d="M12 21.5C16.4783 21.5 18.7175 21.5 20.1088 20.1088C21.5 18.7175 21.5 16.4783 21.5 12C21.5 7.52165 21.5 5.28248 20.1088 3.89124C18.7175 2.5 16.4783 2.5 12 2.5C7.52166 2.5 5.28249 2.5 3.89124 3.89124C2.5 5.28249 2.5 7.52166 2.5 12C2.5 16.4783 2.5 18.7175 3.89124 20.1088C5.28248 21.5 7.52165 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 9L9 14.9996M15 15L9 9.00039" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</template>
