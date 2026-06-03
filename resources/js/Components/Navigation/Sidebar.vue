@@ -11,7 +11,7 @@ const isActive = (href) => {
 
 const itemClasses = (item) => ([
     'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition',
-    item.href && isActive(item.href)
+    isActive(item.href)
         ? 'bg-gray-200 text-ctext dark:bg-gray-700'
         : 'text-muted hover:bg-gray-100 hover:text-ctext dark:hover:bg-gray-700',
 ]);

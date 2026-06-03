@@ -1,5 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
+
+import InputLabel from '@/Components/Forms/InputLabel.vue';
+import TextInput from '@/Components/Forms/TextInput.vue';
+import InputError from '@/Components/Forms/InputError.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 
 const form = useForm({
     current_password: '',
@@ -8,10 +14,13 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put('/password', {
+    form.put(route('password.update'), {
         onSuccess: () => form.reset(),
     });
 };
+
+const page = usePage();
+
 </script>
 
 <template>
@@ -33,47 +42,45 @@ const submit = () => {
         >
 
             <div>
-                <label class="block text-sm font-medium text-ctext">
-                    Current Password
-                </label>
-                <input
+                <InputLabel for="current_password" value="Current Password" />
+                <TextInput
+                    id="current_password"
                     v-model="form.current_password"
-                    type="password"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
-                >
+                    type="password" 
+                    autocomplete="current-password"
+                />
+                <InputError :message="form.errors.current_password" class="mt-2" />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-ctext">
-                    New Password
-                </label>
-                <input
+                <InputLabel for="password" value="New Password" />
+                <TextInput
+                    id="password"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
-                >
+                    autocomplete="new-password"
+                    
+                />
+                <InputError :message="form.errors.password" class="mt-2" />
             </div>
-
+            
             <div>
-                <label class="block text-sm font-medium text-ctext">
-                    Confirm New Password
-                </label>
-                <input
+                <InputLabel for="password_confirmation" value="Confirm New Password" />
+                <TextInput
+                    id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
-                >
+                    autocomplete="new-password"
+                />
+                <InputError :message="form.errors.password_confirmation" class="mt-2" />
             </div>
 
-            <button
+            <PrimaryButton
                 type="submit"
                 :disabled="form.processing"
-                class="px-5 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
             >
                 Update Password
-            </button>
-
+            </PrimaryButton>
         </form>
-
     </section>
 </template>

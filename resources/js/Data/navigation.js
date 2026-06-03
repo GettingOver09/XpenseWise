@@ -10,7 +10,7 @@ import {
     SmartIcon,
     UserAccountIcon,
     UserIcon,
-} from '@/Components/Icons';
+} from "@/Components/Icons";
 
 export default [
     {

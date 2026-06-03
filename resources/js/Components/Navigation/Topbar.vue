@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
 const dropdownOpen = ref(false);
 const mobileMenuOpen = ref(false);
 
 const page = usePage();
-const user = page.props.auth?.user ?? {};
+const user = computed(() => page.props.auth?.user ?? {});
 
 const isActive = (path) => {
     return page.url === path;
@@ -30,6 +30,7 @@ const isActive = (path) => {
                     </Link>
 
                     <!-- Desktop Navigation -->
+                     <!-- 
                     <div class="hidden md:flex items-center gap-4">
 
                         <Link
@@ -57,6 +58,7 @@ const isActive = (path) => {
                         </Link>
 
                     </div>
+                     -->
                 </div>
 
                 <!-- RIGHT - Desktop User Dropdown -->
@@ -91,7 +93,7 @@ const isActive = (path) => {
                         <div
                             v-if="dropdownOpen"
                             @click="dropdownOpen = false"
-                            class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50"
+                            class="absolute right-0 mt-2 w-48 bg-background border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50"
                         >
                             <Link
                                 href="/profile"

@@ -1,6 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 
+import InputLabel from '@/Components/Forms/InputLabel.vue';
+import TextInput from '@/Components/Forms/TextInput.vue';
+import InputError from '@/Components/Forms/InputError.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
+
 const props = defineProps({
     user: Object,
 });
@@ -11,7 +16,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.patch('/profile');
+    form.patch(route('profile.update'));
 };
 </script>
 
@@ -32,54 +37,42 @@ const submit = () => {
             @submit.prevent="submit"
             class="mt-6 space-y-6"
         >
-
             <div>
-                <label class="block text-sm font-medium text-ctext">
-                    Name
-                </label>
-
-                <input
+                <InputLabel for="name" value="Name" />
+                <TextInput
+                    id="name"
+                    autocomplete="name"
                     v-model="form.name"
                     type="text"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
-                >
-
-                <p
+                />
+                <InputError
                     v-if="form.errors.name"
-                    class="mt-2 text-sm text-red-500"
-                >
-                    {{ form.errors.name }}
-                </p>
+                    :message="form.errors.name"
+                    class="mt-2"
+                />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-ctext">
-                    Email
-                </label>
-
-                <input
+                <InputLabel for="email" value="Email" />
+                <TextInput
+                    id="email"
+                    autocomplete="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full rounded-lg border-gray-300 dark:bg-gray-900 dark:border-gray-700 focus:border-primary focus:ring-primary"
-                >
-
-                <p
+                />
+                <InputError
                     v-if="form.errors.email"
-                    class="mt-2 text-sm text-red-500"
-                >
-                    {{ form.errors.email }}
-                </p>
+                    :message="form.errors.email"
+                    class="mt-2"
+                />
             </div>
 
-            <button
+            <PrimaryButton
                 type="submit"
                 :disabled="form.processing"
-                class="px-3 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition"
             >
                 Save Changes
-            </button>
-
+            </PrimaryButton>
         </form>
-
     </section>
 </template>
