@@ -18,9 +18,9 @@ const itemClasses = (item) => ([
 </script>
 
 <template>
-    <aside class="w-64 min-h-screen border-r border-gray-200 dark:border-gray-700 bg-background">
+    <aside class="w-52 min-h-screen bg-background">
         <!-- Brand Logo -->
-        <div class="p-[18px] border-b border-muted/20 dark:border-gray-700">
+        <div class="p-[18px] dark:border-gray-700">
             <h1 class="text-xl font-bold text-ctext">
                 XpenseWise
             </h1>

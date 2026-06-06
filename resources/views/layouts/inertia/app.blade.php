@@ -18,7 +18,9 @@ x-init="$watch('theme', value => localStorage.setItem('theme', value))"
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Ziggy -->
     @routes
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead

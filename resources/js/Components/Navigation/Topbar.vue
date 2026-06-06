@@ -26,7 +26,7 @@ const isActive = (path) => {
                         href="/dashboard"
                         class="text-xl font-bold text-ctext"
                     >
-                        XpenseWise
+                        Page Name
                     </Link>
 
                     <!-- Desktop Navigation -->

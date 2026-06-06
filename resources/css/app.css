@@ -20,3 +20,34 @@
     --color-muted: 70.83% 0.024 246.6;          /* #9ca3af */
 }
 /* When the 'dark' class is present on the <html> tag */
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Modern Styled Scrollbar utility */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px; /* Slim size */
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; /* Seamless background integration */
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: oklch(var(--color-muted)); /* Soft theme color */
+        border-radius: 9999px; /* Smooth rounded handle */
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: oklch(var(--color-muted) / 0.4); /* Darker on hover */
+    }
+
+    /* Fallback support for Firefox */
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: oklch(var(--color-muted) / 0.2) transparent;
+    }
+}

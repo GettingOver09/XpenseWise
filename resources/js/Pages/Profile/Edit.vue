@@ -18,8 +18,7 @@ const user = usePage().props.auth.user;
 <template>
     <Head title="Profile" />
 
-    <div class="mx-auto space-y-6">
-
+    <div class="space-y-6 px-6 py-6">
         <div>
             <h1 class="text-3xl font-bold text-ctext">
                 Profile Settings

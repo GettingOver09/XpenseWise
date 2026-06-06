@@ -10,8 +10,7 @@ defineOptions({
 <template>
     <Head title="About" />
 
-    <div class="mx-auto space-y-8">
-
+    <div class="mx-auto px-6 py-6">
         <!-- Page Header -->
         <div>
             <h1 class="text-3xl font-bold text-ctext">
@@ -43,7 +42,7 @@ defineOptions({
         <!-- Footer Navigation -->
         <div class="pt-4">
             <Link
-                href="/dashboard"
+                :href="route('dashboard')"
                 class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
             >
                 ← Back to Dashboard
