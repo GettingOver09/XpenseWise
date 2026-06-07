@@ -126,7 +126,13 @@
                     @click="toggleCollapse"
                     :class="sidebarButtonClasses"
                 >
-                    <component :is="CircleArrowLeft02Icon" class="shrink-0" size="22" />
+                    <component :is="CircleArrowLeft02Icon" 
+                        class="shrink-0" 
+                        size="22" 
+                        :class="{
+                            'rotate-180': sidebarStore.collapsed
+                        }"
+                    />
                     <span v-show="!sidebarStore.collapsed">Collapse</span>
                 </button>
             </div>
