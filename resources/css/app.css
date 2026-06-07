@@ -23,31 +23,30 @@
 
 @layer utilities {
     .no-scrollbar::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        display: none;
     }
     .no-scrollbar {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
-    /* Modern Styled Scrollbar utility */
     .custom-scrollbar::-webkit-scrollbar {
-        width: 8px; /* Slim size */
+        width: 8px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent; /* Seamless background integration */
+        background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: oklch(var(--color-muted)); /* Soft theme color */
-        border-radius: 9999px; /* Smooth rounded handle */
+        background-color: oklch(var(--color-muted));
+        border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: oklch(var(--color-muted) / 0.4); /* Darker on hover */
+        background-color: oklch(var(--color-muted) / 0.4);
     }
 
     /* Fallback support for Firefox */
     .custom-scrollbar {
-        scrollbar-width: thin;
+        /* scrollbar-width: thin; */
         scrollbar-color: oklch(var(--color-muted) / 0.2) transparent;
     }
 }

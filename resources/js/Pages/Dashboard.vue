@@ -24,7 +24,7 @@ defineOptions({
             <!-- Theme Toggle -->
             <button
                 @click="themeStore.toggleTheme"
-                class="p-3 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                class="p-3 rounded-2xl bg-gray-100 dark:bg-gray-800 bg-hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
                 <span v-if="themeStore.theme === 'dark'" class="text-2xl">☀️</span>
                 <span v-else class="text-2xl">🌙</span>

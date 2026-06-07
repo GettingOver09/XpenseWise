@@ -1,64 +1,60 @@
 import {
+    DashboardSquare02Icon,
+    Invoice01Icon,
+    PiggyBankIcon,
+    ParagraphBulletsPoint01Icon,
+    UserAccountIcon,
+    Settings01Icon,
+    UserIcon,
+    HelpCircleIcon,
     ChatQuestion01Icon,
     CircleArrowLeft02Icon,
-    DashboardSquare02Icon,
-    HelpCircleIcon,
-    Invoice01Icon,
-    ParagraphBulletsPoint01Icon,
-    PiggyBankIcon,
-    Settings01Icon,
-    SmartIcon,
-    UserAccountIcon,
-    UserIcon,
 } from "@/Components/Icons";
 
-export default [
-    {
-        label: "Dashboard",
-        href: "/dashboard",
-        icon: DashboardSquare02Icon,
-    },
-    {
-        label: "Transactions",
-        icon: Invoice01Icon,
-    },
-    {
-        label: "Budgets",
-        icon: PiggyBankIcon,
-    },
-    {
-        label: "Categories",
-        icon: ParagraphBulletsPoint01Icon,
-    },
-    {
-        label: "Accounts",
-        icon: UserAccountIcon,
-    },
-    {
-        label: "About",
-        href: "/about",
-        icon: SmartIcon,
-    },
-    {
-        label: "Profile",
-        href: "/profile",
-        icon: UserIcon,
-    },
-    {
-        label: "Settings",
-        icon: Settings01Icon,
-        spacerBefore: true,
-    },
-    {
-        label: "FAQ",
-        icon: HelpCircleIcon,
-    },
-    {
-        label: "Contact Us",
-        icon: ChatQuestion01Icon,
-    },
-    {
-        label: "Collapse",
-        icon: CircleArrowLeft02Icon,
-    },
-];
+export default {
+    main: [
+        {
+            label: "Dashboard",
+            route: "dashboard",
+            icon: DashboardSquare02Icon,
+        },
+        {
+            label: "Transactions",
+            route: "transactions",
+            icon: Invoice01Icon,
+        },
+        {
+            label: "Budgets",
+            route: "budgets",
+            icon: PiggyBankIcon,
+        },
+        {
+            label: "Categories",
+            route: "categories",
+            icon: ParagraphBulletsPoint01Icon,
+        },
+        {
+            label: "Accounts",
+            route: "accounts",
+            icon: UserAccountIcon,
+        },
+    ],
+
+    secondary: [
+        {
+            label: "Settings",
+            route: "settings",
+            icon: Settings01Icon,
+        },
+        {
+            label: "FAQ",
+            route: "faq",
+            icon: HelpCircleIcon,
+        },
+        {
+            label: "Contact Us",
+            route: "about",
+            icon: ChatQuestion01Icon,
+        },
+    ],
+};

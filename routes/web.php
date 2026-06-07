@@ -13,6 +13,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/transactions', function () {
+        return Inertia::render('Transactions');
+    })->name('transactions');
+
+    Route::get('/budgets', function () {
+        return Inertia::render('Budgets');
+    })->name('budgets');
+
+    Route::get('/categories', function () {
+        return Inertia::render('Categories');
+    })->name('categories');
+
+    Route::get('/accounts', function () {
+        return Inertia::render('Accounts');
+    })->name('accounts');
+
+    Route::get('/settings', function () {
+        return Inertia::render('Settings');
+    })->name('settings');
+
+    Route::get('/faq', function () {
+        return Inertia::render('FAQ');
+    })->name('faq');
+
     Route::get('/about', function () {
         return Inertia::render('About');
     })->name('about');
