@@ -4,6 +4,7 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createPinia } from "pinia";
 import { ZiggyVue } from "ziggy-js";
+import VueApexCharts from "vue3-apexcharts";
 import Alpine from "alpinejs";
 
 // Keep Alpine for legacy components,
@@ -26,7 +27,10 @@ createInertiaApp({
         const app = createApp({ render: () => h(App, props) });
         Alpine.start();
 
-        app.use(plugin).use(pinia).use(ZiggyVue, props.initialPage.props.ziggy);
+        app.use(plugin)
+            .use(pinia)
+            .use(VueApexCharts)
+            .use(ZiggyVue, props.initialPage.props.ziggy);
 
         return app.mount(el);
     },
