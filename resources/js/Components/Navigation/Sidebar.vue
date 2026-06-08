@@ -33,7 +33,7 @@
     ];
 
     const sidebarButtonClasses = [
-        'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition',
+        'flex w-full font-bold items-center gap-3 rounded-lg px-4 py-3 mt-5 text-left transition',
         'text-muted hover:bg-gray-100 hover:text-ctext dark:hover:bg-gray-700',
     ];
 
