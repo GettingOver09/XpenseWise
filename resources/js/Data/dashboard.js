@@ -21,18 +21,58 @@ export const summaryCards = [
     },
 ];
 
-export const netWorthTrend = [
-    28500, 30250, 31800, 33600, 35150, 37700, 39400, 42100, 43800, 45200, 46850,
-    48250,
-];
+export const netWorthTrend = {
+    "1D": [240000, 241000, 242000, 243000],
+    "1W": [220000, 225000, 228000, 232000, 235000, 240000, 243000],
+    "1M": [180000, 190000, 200000, 210000],
+    "6M": [120000, 140000, 170000, 190000, 220000, 243000],
+    "1Y": [
+        90000, 100000, 110000, 130000, 145000, 160000, 175000, 190000, 205000,
+        220000, 235000, 243000,
+    ],
+};
 
-export const expenseBreakdown = [
-    { label: "Food", value: 4200 },
-    { label: "Bills", value: 3100 },
-    { label: "Transport", value: 1850 },
-    { label: "Shopping", value: 2100 },
-    { label: "Subscriptions", value: 1230 },
-];
+export const expenseBreakdown = {
+    "1D": [
+        { label: "Food", value: 140 },
+        { label: "Bills", value: 0 },
+        { label: "Transport", value: 25 },
+        { label: "Shopping", value: 15 },
+        { label: "Subscriptions", value: 0 },
+    ],
+
+    "1W": [
+        { label: "Food", value: 980 },
+        { label: "Bills", value: 450 },
+        { label: "Transport", value: 180 },
+        { label: "Shopping", value: 320 },
+        { label: "Subscriptions", value: 40 },
+    ],
+
+    "1M": [
+        { label: "Food", value: 4200 },
+        { label: "Bills", value: 3100 },
+        { label: "Transport", value: 1850 },
+        { label: "Shopping", value: 2100 },
+        { label: "Subscriptions", value: 1230 },
+    ],
+
+    "6M": [
+        { label: "Food", value: 24200 },
+        { label: "Bills", value: 18600 },
+        { label: "Transport", value: 10400 },
+        { label: "Shopping", value: 12100 },
+        { label: "Subscriptions", value: 7380 },
+    ],
+
+    "1Y": [
+        { label: "Food", value: 49400 },
+        { label: "Bills", value: 37200 },
+        { label: "Transport", value: 21600 },
+        { label: "Shopping", value: 24500 },
+        { label: "Subscriptions", value: 14760 },
+    ],
+};
 
 export const accounts = [
     { name: "BDO Savings", balance: 22800 },

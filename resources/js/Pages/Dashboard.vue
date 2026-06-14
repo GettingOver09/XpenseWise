@@ -13,7 +13,8 @@
     import { useThemeStore } from '@/Stores/theme';
     import { useDashboardCharts } from '@/Composables/useDashboardCharts';
     import { formatMoney} from '@/Utils/currency';
-    
+    import { ref } from 'vue';
+
     import SummaryCards from '@/Components/Dashboard/SummaryCards.vue';
     import NetWorthChart from '@/Components/Dashboard/NetWorthChart.vue';
     import ExpenseBreakdownChart from '@/Components/Dashboard/ExpenseBreakdownChart.vue';
@@ -33,6 +34,9 @@
     const muted = computed(() => (isDark.value ? "#9ca3af" : "#6b7280"));
     const grid = computed(() => (isDark.value ? "#374151" : "#e5e7eb"));
 
+    const netWorthPeriod = ref('1M');
+    const expensePeriod = ref('1M');
+
     const {
         netWorthOptions,
         netWorthSeries,
@@ -43,14 +47,16 @@
         budgetUsageOptions,
         budgetUsageSeries,
     } = useDashboardCharts({
-        netWorthTrend,
-        expenseBreakdown,
-        accounts,
-        budgets,
         isDark,
         foreground,
         muted,
         grid,
+        netWorthTrend,
+        netWorthPeriod,
+        expenseBreakdown,
+        expensePeriod,
+        accounts,
+        budgets,
     });
 </script>
 
@@ -79,11 +85,15 @@
             <NetWorthChart
                 :options="netWorthOptions"
                 :series="netWorthSeries"
+                :period="netWorthPeriod"
+                @update:period="netWorthPeriod = $event"
             />
 
             <ExpenseBreakdownChart
                 :options="expenseBreakdownOptions"
                 :series="expenseBreakdownSeries"
+                :period="expensePeriod"
+                @update:period="expensePeriod = $event"
             />
         </div>
 

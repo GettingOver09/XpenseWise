@@ -2,14 +2,16 @@ import { formatMoney } from "@/Utils/currency";
 import { computed } from "vue";
 
 export function useDashboardCharts({
-    netWorthTrend,
-    expenseBreakdown,
-    accounts,
-    budgets,
     isDark,
     foreground,
     muted,
     grid,
+    netWorthTrend,
+    netWorthPeriod,
+    expenseBreakdown,
+    expensePeriod,
+    accounts,
+    budgets,
 }) {
     const chartBase = computed(() => ({
         chart: {
@@ -29,6 +31,33 @@ export function useDashboardCharts({
             },
         },
     }));
+
+    // ? NET WORTH TREND ================================================
+
+    const netWorthCategories = {
+        "1D": ["00:00", "06:00", "12:00", "18:00", "24:00"],
+
+        "1W": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+
+        "1M": ["Week 1", "Week 2", "Week 3", "Week 4"],
+
+        "6M": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+
+        "1Y": [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ],
+    };
 
     const netWorthOptions = computed(() => ({
         ...chartBase.value,
@@ -55,20 +84,7 @@ export function useDashboardCharts({
             width: 3,
         },
         xaxis: {
-            categories: [
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec",
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-            ],
+            categories: netWorthCategories[netWorthPeriod.value],
             axisBorder: { show: false },
             axisTicks: { show: false },
             labels: { style: { colors: muted.value } },
@@ -84,18 +100,23 @@ export function useDashboardCharts({
     const netWorthSeries = computed(() => [
         {
             name: "Net Worth",
-            data: netWorthTrend,
+            data: netWorthTrend[netWorthPeriod.value],
         },
     ]);
 
+    // ? EXPENSE BREAKDOWN ================================================
+
     const expenseBreakdownOptions = computed(() => ({
         ...chartBase.value,
-        labels: expenseBreakdown.map((item) => item.label),
+        labels: expenseBreakdown[expensePeriod.value].map((item) => item.label),
         colors: ["#ef4444", "#f59e0b", "#06b6d4", "#8b5cf6", "#64748b"],
+        legend: {
+            position: "bottom",
+        },
         plotOptions: {
             pie: {
                 donut: {
-                    size: "68%",
+                    size: "60%",
                     labels: {
                         show: true,
                         name: {
@@ -111,7 +132,9 @@ export function useDashboardCharts({
                             color: muted.value,
                             formatter: () =>
                                 formatMoney(
-                                    expenseBreakdown.reduce(
+                                    expenseBreakdown[
+                                        expensePeriod.value
+                                    ].reduce(
                                         (total, item) => total + item.value,
                                         0,
                                     ),
@@ -127,8 +150,10 @@ export function useDashboardCharts({
     }));
 
     const expenseBreakdownSeries = computed(() =>
-        expenseBreakdown.map((item) => item.value),
+        expenseBreakdown[expensePeriod.value].map((item) => item.value),
     );
+
+    // ? ACCOUNTS ================================================
 
     const accountsOptions = computed(() => ({
         ...chartBase.value,
@@ -166,6 +191,8 @@ export function useDashboardCharts({
             data: accounts.map((item) => item.balance),
         },
     ]);
+
+    // ? BUDGETS ================================================
 
     const budgetUsageOptions = computed(() => ({
         ...chartBase.value,
