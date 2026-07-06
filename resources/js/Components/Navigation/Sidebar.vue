@@ -26,14 +26,14 @@
     };
 
     const itemClasses = (item) => [
-        'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition',
+        'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors duration-150 ease-out',
         isActive(item.route)
             ? 'bg-gray-200 text-ctext dark:bg-gray-700'
             : 'text-muted hover:bg-gray-100 hover:text-ctext dark:hover:bg-gray-700',
     ];
 
     const sidebarButtonClasses = [
-        'flex w-full font-bold items-center gap-3 rounded-lg px-4 py-3 mt-5 text-left transition',
+        'flex w-full font-bold items-center gap-3 rounded-lg px-4 py-3 mt-5 text-left transition-colors duration-150 ease-out',
         'text-muted hover:bg-gray-100 hover:text-ctext dark:hover:bg-gray-700',
     ];
 
@@ -59,7 +59,7 @@
 
 <template>
     <aside  :class="[
-        'flex flex-col min-h-screen bg-background no-scrollbar overflow-y-auto overflow-x-hidden transition-all duration-300',
+        'flex flex-col min-h-screen bg-background no-scrollbar overflow-y-auto overflow-x-hidden transition-[width] duration-200 ease-in-out',
         sidebarStore.collapsed ? 'w-20' : 'w-52'
     ]">
     
