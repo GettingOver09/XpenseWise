@@ -12,7 +12,7 @@
     } from '@/Data/dashboard';
     import { useThemeStore } from '@/Stores/theme';
     import { useDashboardCharts } from '@/Composables/useDashboardCharts';
-    import { formatMoney} from '@/Utils/currency';
+    import { formatMoney } from '@/Utils/currency';
     import { ref } from 'vue';
 
     import SummaryCards from '@/Components/Dashboard/SummaryCards.vue';
