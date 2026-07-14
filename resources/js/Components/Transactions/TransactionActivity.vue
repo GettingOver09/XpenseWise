@@ -24,7 +24,9 @@ defineProps({
                     :class="
                         transaction.type === 'income'
                             ? 'bg-emerald-500'
-                            : 'bg-rose-500'
+                            : transaction.type === 'transfer'
+                              ? 'bg-slate-500'
+                              : 'bg-rose-500'
                     "
                 />
 

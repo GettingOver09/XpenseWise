@@ -78,7 +78,9 @@ defineProps({
                             :class="
                                 transaction.type === 'income'
                                     ? 'text-emerald-600 dark:text-emerald-400'
-                                    : 'text-rose-600 dark:text-rose-400'
+                                    : transaction.type === 'transfer'
+                                      ? 'text-slate-600 dark:text-slate-400'
+                                      : 'text-rose-600 dark:text-rose-400'
                             "
                         >
                             {{ formatMoney(transaction.amount) }}

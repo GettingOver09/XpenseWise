@@ -10,7 +10,6 @@ import { useThemeStore } from "@/Stores/theme";
 import { formatMoney } from "@/Utils/currency";
 
 import TransactionFilters from "@/Components/Transactions/TransactionFilters.vue";
-import TransactionTypeTabs from "@/Components/Transactions/TransactionTypeTabs.vue";
 import TransactionTable from "@/Components/Transactions/TransactionTable.vue";
 import TransactionActivity from "@/Components/Transactions/TransactionActivity.vue";
 
@@ -27,12 +26,16 @@ const transactionTypeIndex = ref(0);
 const transactionViewIndex = ref(0);
 const selectedAccount = ref("All accounts");
 const searchQuery = ref("");
+const selectedCategories = ref([]);
+const selectedDateFrom = ref("");
+const selectedDateTo = ref("");
 
 const {
     periodOptions,
     transactionTypes,
     viewTabs,
     accounts,
+    categories,
     selectedType,
     selectedPeriodLabel,
     filteredTransactions,
@@ -42,6 +45,9 @@ const {
     transactionTypeIndex,
     selectedAccount,
     searchQuery,
+    selectedCategories,
+    selectedDateFrom,
+    selectedDateTo,
 });
 </script>
 
@@ -67,25 +73,22 @@ const {
             </button>
         </div>
         <section
-            class="rounded-lg border border-gray-200 bg-background p-5 shadow-sm dark:border-gray-700"
+            class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
         >
-            <div
-                class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
-            >
-                <!-- Filters -->
-                <TransactionFilters
-                    v-model:period="transactionsPeriod"
-                    v-model:account="selectedAccount"
-                    v-model:search="searchQuery"
-                    :period-options="periodOptions"
-                    :accounts="accounts"
-                />
-
-                <TransactionTypeTabs
-                    v-model:selected-index="transactionTypeIndex"
-                    :types="transactionTypes"
-                />
-            </div>
+            <!-- Filters -->
+            <TransactionFilters
+                v-model:period="transactionsPeriod"
+                v-model:account="selectedAccount"
+                v-model:search="searchQuery"
+                v-model:selected-index="transactionTypeIndex"
+                v-model:selected-categories="selectedCategories"
+                v-model:from-date="selectedDateFrom"
+                v-model:to-date="selectedDateTo"
+                :period-options="periodOptions"
+                :accounts="accounts"
+                :types="transactionTypes"
+                :categories="categories"
+            />
         </section>
 
         <!-- View Tabs -->
@@ -96,16 +99,6 @@ const {
             <div
                 class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
             >
-                <div>
-                    <h2 class="text-lg font-semibold text-ctext">
-                        {{ selectedType }} Transactions
-                    </h2>
-                    <p class="text-sm text-muted">
-                        {{ filteredTransactions.length }} results for
-                        {{ selectedPeriodLabel }}
-                    </p>
-                </div>
-
                 <TabList
                     class="flex w-full space-x-1 rounded-xl bg-gray-100 p-1 sm:w-72 dark:bg-gray-800"
                 >
@@ -127,6 +120,16 @@ const {
                         </button>
                     </Tab>
                 </TabList>
+
+                <div>
+                    <h2 class="text-lg font-semibold text-ctext">
+                        {{ selectedType }} Transactions
+                    </h2>
+                    <p class="text-sm text-muted">
+                        {{ filteredTransactions.length }} results for
+                        {{ selectedPeriodLabel }}
+                    </p>
+                </div>
             </div>
 
             <TabPanels class="mt-4">
