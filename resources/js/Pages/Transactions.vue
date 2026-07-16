@@ -12,6 +12,7 @@ import { formatMoney } from "@/Utils/currency";
 import TransactionFilters from "@/Components/Transactions/TransactionFilters.vue";
 import TransactionTable from "@/Components/Transactions/TransactionTable.vue";
 import TransactionActivity from "@/Components/Transactions/TransactionActivity.vue";
+import CreateTransactionModal from "@/Components/Transactions/CreateTransactionModal.vue";
 
 defineOptions({
     name: "Transactions",
@@ -21,7 +22,7 @@ defineOptions({
 const themeStore = useThemeStore();
 
 const isDark = computed(() => themeStore.theme === "dark");
-const transactionsPeriod = ref("1M");
+const transactionsPeriod = ref("last_month");
 const transactionTypeIndex = ref(0);
 const transactionViewIndex = ref(0);
 const selectedAccount = ref("All accounts");
@@ -88,6 +89,12 @@ const {
                 :accounts="accounts"
                 :types="transactionTypes"
                 :categories="categories"
+            />
+
+            <CreateTransactionModal
+                :accounts="accounts"
+                :categories="categories"
+                :types="transactionTypes"
             />
         </section>
 

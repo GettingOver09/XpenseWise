@@ -54,10 +54,6 @@ defineProps({
                         {{ transaction.date }} · {{ transaction.category }} ·
                         {{ transaction.account }}
                     </p>
-
-                    <p class="mt-2 text-sm text-ctext">
-                        {{ transaction.note }}
-                    </p>
                 </div>
             </li>
         </ol>

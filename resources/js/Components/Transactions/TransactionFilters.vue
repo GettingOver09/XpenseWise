@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import {
     Dialog,
     DialogPanel,
@@ -54,6 +54,44 @@ const selectedPeriodLabel = computed(() => {
     return props.periodOptions.find((option) => option.value === period.value)
         ?.label;
 });
+
+const selectedType = computed(() => props.types[selectedIndex.value] ?? "");
+
+const showCustomRange = computed(() => period.value === "custom");
+
+const categoryFilterVisible = computed(
+    () => selectedType.value.toLowerCase() !== "transfer",
+);
+
+const defaultPeriod =
+    props.periodOptions.find((option) => option.value === "last_month")
+        ?.value ??
+    props.periodOptions[0]?.value ??
+    "today";
+const defaultAccount = props.accounts.includes("All accounts")
+    ? "All accounts"
+    : (props.accounts[0] ?? "");
+
+const resetFilters = () => {
+    period.value = defaultPeriod;
+    account.value = defaultAccount;
+    search.value = "";
+    selectedIndex.value = 0;
+    selectedCategories.value = [];
+    fromDate.value = "";
+    toDate.value = "";
+};
+
+watch([selectedIndex, () => props.categories], () => {
+    if (selectedType.value.toLowerCase() === "transfer") {
+        selectedCategories.value = [];
+        return;
+    }
+
+    selectedCategories.value = selectedCategories.value.filter((item) =>
+        props.categories.includes(item),
+    );
+});
 </script>
 
 <template>
@@ -71,7 +109,7 @@ const selectedPeriodLabel = computed(() => {
                 v-model="search"
                 type="search"
                 class="mt-2 w-full rounded-lg border-gray-200 bg-background px-4 py-2 text-sm text-ctext shadow-sm placeholder:text-muted focus:border-primary focus:ring-primary dark:border-gray-700"
-                placeholder="Merchant, category, note"
+                placeholder="Merchant, category, description"
             />
         </div>
 
@@ -133,11 +171,19 @@ const selectedPeriodLabel = computed(() => {
                                             Filters
                                         </DialogTitle>
                                         <p class="mt-1 text-sm text-muted">
-                                            Refine your transaction list using
-                                            the period, date range, account,
-                                            type, and category filters.
+                                            Refine the transaction list with
+                                            period, account, type, and category
+                                            controls.
                                         </p>
                                     </div>
+
+                                    <button
+                                        type="button"
+                                        @click="resetFilters"
+                                        class="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-background px-4 py-2 text-sm font-semibold text-ctext transition hover:border-primary hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+                                    >
+                                        Clear All Filters
+                                    </button>
                                 </div>
 
                                 <div class="mt-6 grid gap-4 lg:grid-cols-2">
@@ -158,7 +204,7 @@ const selectedPeriodLabel = computed(() => {
                                                     class="absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-lg border border-gray-200 bg-background py-1 text-sm shadow-lg focus:outline-none dark:border-gray-700"
                                                 >
                                                     <ListboxOption
-                                                        v-for="option in periodOptions"
+                                                        v-for="option in props.periodOptions"
                                                         :key="option.value"
                                                         v-slot="{
                                                             active,
@@ -231,11 +277,11 @@ const selectedPeriodLabel = computed(() => {
                                         </Listbox>
                                     </div>
 
-                                    <div class="lg:col-span-2">
-                                        <label
-                                            class="text-sm font-semibold text-ctext"
-                                            >Date Range</label
-                                        >
+                                    <!-- Custom Date Range -->
+                                    <div
+                                        v-if="showCustomRange"
+                                        class="lg:col-span-2"
+                                    >
                                         <div
                                             class="mt-3 grid gap-4 sm:grid-cols-2"
                                         >
@@ -270,6 +316,7 @@ const selectedPeriodLabel = computed(() => {
                                         </div>
                                     </div>
 
+                                    <!-- Transaction Types -->
                                     <div class="lg:col-span-2">
                                         <label
                                             class="text-sm font-semibold text-ctext"
@@ -292,7 +339,7 @@ const selectedPeriodLabel = computed(() => {
                                                     <button
                                                         type="button"
                                                         :class="[
-                                                            'rounded-lg px-3 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900',
+                                                            'flex-1 rounded-lg px-3 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900',
                                                             selected
                                                                 ? 'bg-background text-primary shadow-sm'
                                                                 : 'text-muted hover:bg-white/60 hover:text-ctext dark:hover:bg-gray-700',
@@ -305,7 +352,10 @@ const selectedPeriodLabel = computed(() => {
                                         </TabGroup>
                                     </div>
 
-                                    <div class="lg:col-span-2">
+                                    <div
+                                        v-if="categoryFilterVisible"
+                                        class="lg:col-span-2"
+                                    >
                                         <label
                                             class="text-sm font-semibold text-ctext"
                                             >Categories</label
