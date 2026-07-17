@@ -123,12 +123,12 @@ const {
                                     : 'text-muted hover:bg-white/60 hover:text-ctext dark:hover:bg-gray-700',
                             ]"
                         >
-                            {{ tab }}
+                            {{ tab }} View
                         </button>
                     </Tab>
                 </TabList>
 
-                <div>
+                <div class="flex flex-col sm:items-end">
                     <h2 class="text-lg font-semibold text-ctext">
                         {{ selectedType }} Transactions
                     </h2>

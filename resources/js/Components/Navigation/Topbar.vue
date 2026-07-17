@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { Link, usePage } from '@inertiajs/vue3';
+import { ref, computed } from "vue";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const dropdownOpen = ref(false);
 const mobileMenuOpen = ref(false);
@@ -16,11 +16,9 @@ const isActive = (path) => {
 <template>
     <nav class="bg-background border-b border-gray-200 dark:border-gray-700">
         <div class="px-6">
-            <div class="flex justify-between h-16">
-
+            <div class="flex justify-between h-12">
                 <!-- LEFT -->
                 <div class="flex items-center gap-8">
-
                     <!-- Logo -->
                     <Link
                         href="/dashboard"
@@ -30,7 +28,7 @@ const isActive = (path) => {
                     </Link>
 
                     <!-- Desktop Navigation -->
-                     <!-- 
+                    <!-- 
                     <div class="hidden md:flex items-center gap-4">
 
                         <Link
@@ -63,9 +61,7 @@ const isActive = (path) => {
 
                 <!-- RIGHT - Desktop User Dropdown -->
                 <div class="hidden md:flex items-center gap-4">
-
                     <div class="relative">
-
                         <button
                             @click="dropdownOpen = !dropdownOpen"
                             class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -111,9 +107,7 @@ const isActive = (path) => {
                                 Log Out
                             </Link>
                         </div>
-
                     </div>
-
                 </div>
 
                 <!-- Mobile Burger Button -->
@@ -135,7 +129,6 @@ const isActive = (path) => {
                         />
                     </svg>
                 </button>
-
             </div>
         </div>
 

@@ -1,61 +1,71 @@
 <script setup>
-import { formatMoney } from "@/Utils/currency";
+import { computed } from "vue";
+import TransactionGroup from "./TransactionGroup.vue";
 
-defineProps({
+const props = defineProps({
     transactions: {
         type: Array,
         required: true,
     },
 });
+
+// Group transactions by date (YYYY-MM-DD) — presentational only
+const groups = computed(() => {
+    const map = new Map();
+
+    props.transactions.forEach((tx) => {
+        // prefer ISO date field transaction_date, fall back to date
+        const d = tx.transaction_date
+            ? new Date(tx.transaction_date)
+            : new Date(tx.date);
+
+        if (isNaN(d.getTime())) return;
+
+        // CUT DOWN TO YYYY-MM-DD FOR GROUPING
+        const key = d.toISOString().slice(0, 10);
+
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+
+        map.get(key).push(tx);
+    });
+
+    // CREATE AN ARRAY OF GROUPS SORTED BY DATE DESCENDING
+    return Array.from(map.entries())
+        .sort((groupA, groupB) => {
+            const dateA = groupA[0];
+            const dateB = groupB[0];
+
+            if (dateA < dateB) {
+                return 1;
+            }
+
+            if (dateA > dateB) {
+                return -1;
+            }
+
+            return 0;
+        })
+        .map(([dateKey, transactions]) => ({ dateKey, transactions }));
+});
 </script>
 
 <template>
     <section
-        class="rounded-lg border border-gray-200 bg-background p-5 shadow-sm dark:border-gray-700"
+        class="rounded-lg border-gray-200 bg-background shadow-sm dark:border-gray-700"
     >
-        <ol class="space-y-4">
-            <li
-                v-for="transaction in transactions"
-                :key="transaction.id"
-                class="flex gap-4 rounded-lg border border-gray-200 p-4 dark:border-gray-700"
-            >
-                <div
-                    class="mt-1 h-3 w-3 shrink-0 rounded-full"
-                    :class="
-                        transaction.type === 'income'
-                            ? 'bg-emerald-500'
-                            : transaction.type === 'transfer'
-                              ? 'bg-slate-500'
-                              : 'bg-rose-500'
-                    "
-                />
+        <div v-if="!groups.length" class="py-8 text-center text-sm text-muted">
+            No activity
+        </div>
 
-                <div class="min-w-0 flex-1">
-                    <div
-                        class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"
-                    >
-                        <p class="font-semibold text-ctext">
-                            {{ transaction.merchant }}
-                        </p>
-
-                        <p
-                            class="text-sm font-semibold"
-                            :class="
-                                transaction.type === 'income'
-                                    ? 'text-emerald-600 dark:text-emerald-400'
-                                    : 'text-rose-600 dark:text-rose-400'
-                            "
-                        >
-                            {{ formatMoney(transaction.amount) }}
-                        </p>
-                    </div>
-
-                    <p class="mt-1 text-sm text-muted">
-                        {{ transaction.date }} · {{ transaction.category }} ·
-                        {{ transaction.account }}
-                    </p>
-                </div>
-            </li>
-        </ol>
+        <div class="space-y-6">
+            <TransactionGroup
+                v-for="group in groups"
+                :key="group.dateKey"
+                :dateKey="group.dateKey"
+                :transactions="group.transactions"
+            />
+        </div>
     </section>
 </template>
