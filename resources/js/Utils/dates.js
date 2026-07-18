@@ -10,3 +10,14 @@ export function formatLongDate(date) {
         day: "numeric",
     });
 }
+
+export function formatTime(date) {
+    const d = new Date(date);
+
+    if (isNaN(d.getTime())) return "";
+
+    return d.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+    });
+}

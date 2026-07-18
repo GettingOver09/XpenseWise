@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import { formatMoney } from "@/Utils/currency";
+import { formatTime } from "@/Utils/dates";
 
 const props = defineProps({
     transaction: {
@@ -24,7 +25,8 @@ const formattedAmount = computed(() => formatMoney(props.transaction.amount));
 const formattedTime = computed(() => {
     if (!props.transaction.transaction_date) return "";
     const d = new Date(props.transaction.transaction_date);
-    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    const time = formatTime(d);
+    return time;
 });
 
 const capitalizedType = computed(() => {
@@ -38,17 +40,17 @@ const capitalizedType = computed(() => {
 
 <template>
     <article
-        class="flex gap-4 rounded-lg border border-gray-200 bg-background p-4 dark:border-gray-700"
+        class="flex overflow-hidden gap-4 rounded-lg border border-gray-200 bg-background dark:border-gray-700"
     >
         <!-- Left: Icon (placeholder) -->
         <div
-            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-lg dark:bg-gray-800"
+            class="flex w-20 self-stretch items-center justify-center bg-gray-100 text-lg dark:bg-gray-800"
         >
-            <span aria-hidden>🍔</span>
+            <span aria-hidden class="text-4xl"> 🍔 </span>
         </div>
 
         <!-- Middle: Info -->
-        <div class="min-w-0 flex-1">
+        <div class="min-w-0 flex flex-1 items-center">
             <div class="flex items-start justify-between gap-4">
                 <div class="min-w-0">
                     <p class="truncate font-semibold text-ctext">
@@ -62,7 +64,7 @@ const capitalizedType = computed(() => {
                         {{ transaction.description }}
                     </p>
 
-                    <div class="mt-2 flex flex-wrap gap-2">
+                    <div class="mt-4 flex flex-wrap gap-2">
                         <span
                             v-if="transaction.category"
                             class="rounded-full border border-gray-200 bg-background px-2 py-1 text-xs font-medium text-ctext dark:border-gray-700"
@@ -85,7 +87,7 @@ const capitalizedType = computed(() => {
 
         <!-- Right: Amount, time, status -->
         <div
-            class="flex w-40 flex-shrink-0 flex-col items-end justify-between text-right"
+            class="flex w-28 py-3 pr-3 flex-col items-end justify-between text-right"
         >
             <div class="">
                 <p :class="['font-semibold', amountClass]">
