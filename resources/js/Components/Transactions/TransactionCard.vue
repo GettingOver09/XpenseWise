@@ -54,7 +54,7 @@ const capitalizedType = computed(() => {
             <div class="flex items-start justify-between gap-4">
                 <div class="min-w-0">
                     <p class="truncate font-semibold text-ctext">
-                        {{ transaction.merchant }}
+                        {{ transaction.payee }}
                         <span class="text-muted">•</span>
                         <span class="text-sm text-muted">{{
                             capitalizedType
