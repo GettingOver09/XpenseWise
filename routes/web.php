@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -13,9 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/transactions', function () {
-        return Inertia::render('Transactions');
-    })->name('transactions');
+    Route::get('/transactions', [TransactionController::class, 'index'])
+        ->name('transactions');
 
     Route::get('/budgets', function () {
         return Inertia::render('Budgets');

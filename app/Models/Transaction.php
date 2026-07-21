@@ -16,6 +16,7 @@ class Transaction extends Model
         'category_id',
         'transfer_group_id',
         'amount',
+        'running_balance',
         'currency',
         'payee',
         'type',
@@ -28,6 +29,7 @@ class Transaction extends Model
     {
         return [
             'amount'           => 'decimal:4',
+            'running_balance'   => 'decimal:4',
             'transaction_date' => 'datetime',
             'created_at'       => 'datetime',
             'updated_at'       => 'datetime',

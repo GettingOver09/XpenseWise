@@ -28,19 +28,18 @@ export function useTransactions({
         const uniqueCategories = new Set();
 
         transactions.value.forEach((transaction) => {
-            if (!transaction.category) {
+            if (!transaction.category) return;
+
+            if (transaction.type === "transfer") return;
+
+            if (
+                selectedType.value.toLowerCase() !== "all" &&
+                transaction.type !== activeType
+            ) {
                 return;
             }
 
-            if (transaction.type === "transfer") {
-                return;
-            }
-
-            if (activeType !== "all" && transaction.type !== activeType) {
-                return;
-            }
-
-            uniqueCategories.add(transaction.category);
+            uniqueCategories.add(transaction.category.name);
         });
 
         return Array.from(uniqueCategories).sort();
@@ -51,7 +50,7 @@ export function useTransactions({
 
         transactions.value.forEach((transaction) => {
             if (transaction.account) {
-                uniqueAccounts.add(transaction.account);
+                uniqueAccounts.add(transaction.account.name);
             }
         });
 
@@ -132,19 +131,19 @@ export function useTransactions({
 
             const matchesAccount =
                 selectedAccount.value === "All accounts" ||
-                transaction.account === selectedAccount.value;
+                transaction.account?.name === selectedAccount.value;
 
             const matchesCategories =
                 !selectedCategories.value.length ||
-                selectedCategories.value.includes(transaction.category);
+                selectedCategories.value.includes(transaction.category?.name);
 
             const matchesQuery =
                 !query ||
                 [
-                    transaction.merchant,
-                    transaction.category,
-                    transaction.account,
-                ].some((field) => field.toLowerCase().includes(query));
+                    transaction.payee,
+                    transaction.category?.name,
+                    transaction.account?.name,
+                ].some((field) => (field ?? "").toLowerCase().includes(query));
 
             let matchesDate = true;
             if (transaction.transaction_date) {

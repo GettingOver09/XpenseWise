@@ -2,8 +2,9 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
-import { transactions } from "@/Data/transactions";
+// import { transactions } from "@/Data/transactions";
 
 import { useTransactions } from "@/Composables/useTransactions";
 import { useThemeStore } from "@/Stores/theme";
@@ -20,6 +21,12 @@ defineOptions({
 });
 
 const themeStore = useThemeStore();
+
+// Props from Laravel Controller
+const { props } = usePage();
+const transactionsData = computed(() => props.transactions?.data || []);
+
+console.log("Transactions Data:", transactionsData.value);
 
 const isDark = computed(() => themeStore.theme === "dark");
 const transactionsPeriod = ref("last_month");
@@ -41,7 +48,7 @@ const {
     selectedPeriodLabel,
     filteredTransactions,
 } = useTransactions({
-    transactions,
+    transactions: transactionsData,
     transactionsPeriod,
     transactionTypeIndex,
     selectedAccount,

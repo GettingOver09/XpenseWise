@@ -48,9 +48,9 @@ return new class extends Migration
 
             $table->enum('type', ['income', 'expense', 'transfer']);     // income, expense, transfer
 
-            $table->enum('status', ["not reviewed", "reviewed"])
-                ->default('not reviewed')
-                ->comment('not reviewed, reviewed');
+            $table->enum('status', ["to review", "reviewed"])
+                ->default('to review')
+                ->comment('to review, reviewed');
 
 
             $table->text('description')->nullable();

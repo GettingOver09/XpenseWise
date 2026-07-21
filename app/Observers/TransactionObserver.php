@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Transaction;
 use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
+use App\Services\AccountBalanceService;
 
 class TransactionObserver
 {
@@ -25,6 +26,9 @@ class TransactionObserver
                 $budget->spent_amount += $transaction->amount;
                 $budget->save();
             }
+
+            app(AccountBalanceService::class)
+                ->recalculate($transaction->account_id);
         });
     }
 
@@ -33,36 +37,58 @@ class TransactionObserver
      */
     public function updated(Transaction $transaction): void
     {
-        if ($transaction->type === 'transfer') return;
+        if ($transaction->type === 'transfer') {
+            return;
+        }
 
-        if ($transaction->isDirty('currency')) {
+        // Currency should never change
+        if ($transaction->wasChanged('currency')) {
             throw new \Exception('Transaction currency cannot be changed.');
         }
 
+        // Only continue if budget-related fields changed
+        if (
+            !$transaction->wasChanged([
+                'amount',
+                'category_id',
+                'transaction_date',
+            ])
+        ) {
+            return;
+        }
+
         DB::transaction(function () use ($transaction) {
+
             $original = $transaction->getOriginal();
 
-            // 1. Subtract from old budget if category or month changed
-            if ($original['category_id'] && $original['amount']) {
-                $oldBudget = Budget::where('user_id', $transaction->user_id)
-                    ->where('category_id', $original['category_id'])
-                    ->whereMonth('month', (new \DateTime($original['transaction_date']))->format('m'))
-                    ->first();
-                if ($oldBudget) {
-                    $oldBudget->spent_amount -= $original['amount'];
-                    $oldBudget->save();
-                }
+            $oldBudget = Budget::where('user_id', $transaction->user_id)
+                ->where('category_id', $original['category_id'])
+                ->whereMonth(
+                    'month',
+                    (new \DateTime($original['transaction_date']))->format('m')
+                )
+                ->first();
+
+            if ($oldBudget) {
+                $oldBudget->spent_amount -= $original['amount'];
+                $oldBudget->save();
             }
 
-            // 2. Add to new budget
             $newBudget = Budget::where('user_id', $transaction->user_id)
                 ->where('category_id', $transaction->category_id)
-                ->whereMonth('month', $transaction->transaction_date->month)
+                ->whereMonth(
+                    'month',
+                    $transaction->transaction_date->month
+                )
                 ->first();
+
             if ($newBudget) {
                 $newBudget->spent_amount += $transaction->amount;
                 $newBudget->save();
             }
+
+            app(AccountBalanceService::class)
+                ->recalculate($transaction->account_id);
         });
     }
 
@@ -82,6 +108,9 @@ class TransactionObserver
                 $budget->spent_amount -= $transaction->amount;
                 $budget->save();
             }
+
+            app(AccountBalanceService::class)
+                ->recalculate($transaction->account_id);
         });
     }
 
