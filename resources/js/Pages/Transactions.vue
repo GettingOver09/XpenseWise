@@ -4,7 +4,6 @@ import { Head } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
-// import { transactions } from "@/Data/transactions";
 
 import { useTransactions } from "@/Composables/useTransactions";
 import { useThemeStore } from "@/Stores/theme";
@@ -14,6 +13,7 @@ import TransactionFilters from "@/Components/Transactions/TransactionFilters.vue
 import TransactionTable from "@/Components/Transactions/TransactionTable.vue";
 import TransactionActivity from "@/Components/Transactions/TransactionActivity.vue";
 import CreateTransactionModal from "@/Components/Transactions/CreateTransactionModal.vue";
+import EditTransactionDrawer from "@/Components/Transactions/EditTransactionDrawer.vue";
 
 defineOptions({
     name: "Transactions",
@@ -22,11 +22,8 @@ defineOptions({
 
 const themeStore = useThemeStore();
 
-// Props from Laravel Controller
 const { props } = usePage();
 const transactionsData = computed(() => props.transactions?.data || []);
-
-console.log("Transactions Data:", transactionsData.value);
 
 const isDark = computed(() => themeStore.theme === "dark");
 const transactionsPeriod = ref("last_month");
@@ -37,6 +34,21 @@ const searchQuery = ref("");
 const selectedCategories = ref([]);
 const selectedDateFrom = ref("");
 const selectedDateTo = ref("");
+
+const showEditDrawer = ref(false);
+const selectedTransaction = ref(null);
+
+const openEditDrawer = (transaction) => {
+    selectedTransaction.value = transaction;
+    showEditDrawer.value = true;
+};
+
+const closeEditDrawer = () => {
+    showEditDrawer.value = false;
+    setTimeout(() => {
+        selectedTransaction.value = null;
+    }, 200);
+};
 
 const {
     periodOptions,
@@ -103,6 +115,12 @@ const {
                 :categories="categories"
                 :types="transactionTypes"
             />
+
+            <EditTransactionDrawer
+                :show="showEditDrawer"
+                :transaction="selectedTransaction"
+                @close="closeEditDrawer"
+            />
         </section>
 
         <!-- View Tabs -->
@@ -148,11 +166,17 @@ const {
 
             <TabPanels class="mt-4">
                 <TabPanel>
-                    <TransactionTable :transactions="filteredTransactions" />
+                    <TransactionTable
+                        :transactions="filteredTransactions"
+                        @edit="openEditDrawer"
+                    />
                 </TabPanel>
 
                 <TabPanel>
-                    <TransactionActivity :transactions="filteredTransactions" />
+                    <TransactionActivity
+                        :transactions="filteredTransactions"
+                        @edit="openEditDrawer"
+                    />
                 </TabPanel>
             </TabPanels>
         </TabGroup>

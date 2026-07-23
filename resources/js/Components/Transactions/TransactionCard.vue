@@ -7,6 +7,8 @@ import {
     getStatusClasses,
     getTypeLabel,
 } from "@/Utils/transactionHelpers";
+import PencilEdit02Icon from "@/Components/Icons/PencilEdit02Icon.vue";
+import Delete02Icon from "@/Components/Icons/Delete02Icon.vue";
 
 const props = defineProps({
     transaction: {
@@ -21,6 +23,8 @@ const formattedAmount = computed(() => formatMoney(props.transaction.amount));
 const formattedDate = computed(() =>
     formatLongDate(props.transaction.transaction_date),
 );
+
+const emit = defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -98,6 +102,26 @@ const formattedDate = computed(() =>
                             : "To Review"
                     }}
                 </span>
+            </div>
+
+            <div class="mt-4 flex items-center gap-2">
+                <button
+                    type="button"
+                    class="rounded-md p-2 text-slate-500 transition hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-800"
+                    title="Edit Transaction"
+                    @click="emit('edit', transaction)"
+                >
+                    <PencilEdit02Icon :size="18" />
+                </button>
+
+                <button
+                    type="button"
+                    class="rounded-md p-2 text-slate-500 transition hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-800"
+                    title="Delete Transaction"
+                    @click="emit('delete', transaction)"
+                >
+                    <Delete02Icon :size="18" />
+                </button>
             </div>
         </div>
     </article>

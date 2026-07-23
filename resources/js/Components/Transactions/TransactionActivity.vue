@@ -49,6 +49,8 @@ const groups = computed(() => {
         })
         .map(([dateKey, transactions]) => ({ dateKey, transactions }));
 });
+
+const emit = defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -65,6 +67,8 @@ const groups = computed(() => {
                 :key="group.dateKey"
                 :dateKey="group.dateKey"
                 :transactions="group.transactions"
+                @edit="emit('edit', $event)"
+                @delete="emit('delete', $event)"
             />
         </div>
     </section>

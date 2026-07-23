@@ -17,6 +17,8 @@ defineProps({
         default: false,
     },
 });
+
+const emit = defineEmits(["edit"]);
 </script>
 
 <template>
@@ -167,6 +169,7 @@ defineProps({
                                     type="button"
                                     class="rounded-md p-2 text-slate-500 transition hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-800"
                                     title="Edit Transaction"
+                                    @click="emit('edit', transaction)"
                                 >
                                     <PencilEdit02Icon :size="18" />
                                 </button>

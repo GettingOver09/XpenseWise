@@ -14,6 +14,8 @@ const props = defineProps({
 });
 
 const heading = formatLongDate(props.dateKey);
+
+const emit = defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -25,6 +27,8 @@ const heading = formatLongDate(props.dateKey);
                 v-for="tx in transactions"
                 :key="tx.id"
                 :transaction="tx"
+                @edit="emit('edit', $event)"
+                @delete="emit('delete', $event)"
             />
         </div>
     </section>
