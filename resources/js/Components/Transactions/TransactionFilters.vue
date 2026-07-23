@@ -89,7 +89,7 @@ watch([selectedIndex, () => props.categories], () => {
 </script>
 
 <template>
-    <div class="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_auto]">
+    <div class="flex flex-row gap-3">
         <div>
             <label
                 for="transaction-search"
@@ -107,7 +107,7 @@ watch([selectedIndex, () => props.categories], () => {
             />
         </div>
 
-        <div class="flex items-end justify-start lg:justify-end">
+        <div class="flex items-end justify-start">
             <button
                 type="button"
                 @click="showFilterModal = true"

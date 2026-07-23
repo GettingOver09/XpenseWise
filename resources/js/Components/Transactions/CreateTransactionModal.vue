@@ -160,10 +160,8 @@ const submitTransaction = () => {
 </script>
 
 <template>
-    <div
-        class="flex flex-col gap-2 sm:items-end sm:justify-end sm:flex-row sm:gap-3"
-    >
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+    <div class="flex flex-col gap-2">
+        <div class="flex flex-row gap-2">
             <button
                 type="button"
                 @click="openCreateModal"

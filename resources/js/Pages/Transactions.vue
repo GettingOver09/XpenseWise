@@ -14,6 +14,7 @@ import TransactionTable from "@/Components/Transactions/TransactionTable.vue";
 import TransactionActivity from "@/Components/Transactions/TransactionActivity.vue";
 import CreateTransactionModal from "@/Components/Transactions/CreateTransactionModal.vue";
 import EditTransactionDrawer from "@/Components/Transactions/EditTransactionDrawer.vue";
+import DeleteTransactionModal from "@/Components/Transactions/DeleteTransactionModal.vue";
 
 defineOptions({
     name: "Transactions",
@@ -36,7 +37,9 @@ const selectedDateFrom = ref("");
 const selectedDateTo = ref("");
 
 const showEditDrawer = ref(false);
+const showDeleteModal = ref(false);
 const selectedTransaction = ref(null);
+const selectedDeleteTransaction = ref(null);
 
 const openEditDrawer = (transaction) => {
     selectedTransaction.value = transaction;
@@ -48,6 +51,23 @@ const closeEditDrawer = () => {
     setTimeout(() => {
         selectedTransaction.value = null;
     }, 200);
+};
+
+const openDeleteModal = (transaction) => {
+    selectedDeleteTransaction.value = transaction;
+    showDeleteModal.value = true;
+};
+
+const closeDeleteModal = () => {
+    showDeleteModal.value = false;
+    setTimeout(() => {
+        selectedDeleteTransaction.value = null;
+    }, 200);
+};
+
+const confirmDeleteTransaction = (payload) => {
+    console.log("Delete transaction", payload);
+    closeDeleteModal();
 };
 
 const {
@@ -92,10 +112,7 @@ const {
                 {{ isDark ? "Light mode" : "Dark mode" }}
             </button>
         </div>
-        <section
-            class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
-        >
-            <!-- Filters -->
+        <section class="flex flex-row items-end justify-between">
             <TransactionFilters
                 v-model:period="transactionsPeriod"
                 v-model:account="selectedAccount"
@@ -120,6 +137,13 @@ const {
                 :show="showEditDrawer"
                 :transaction="selectedTransaction"
                 @close="closeEditDrawer"
+            />
+
+            <DeleteTransactionModal
+                :show="showDeleteModal"
+                :transaction="selectedDeleteTransaction"
+                @close="closeDeleteModal"
+                @confirm="confirmDeleteTransaction"
             />
         </section>
 
@@ -169,6 +193,7 @@ const {
                     <TransactionTable
                         :transactions="filteredTransactions"
                         @edit="openEditDrawer"
+                        @delete="openDeleteModal"
                     />
                 </TabPanel>
 
@@ -176,6 +201,7 @@ const {
                     <TransactionActivity
                         :transactions="filteredTransactions"
                         @edit="openEditDrawer"
+                        @delete="openDeleteModal"
                     />
                 </TabPanel>
             </TabPanels>

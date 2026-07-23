@@ -18,7 +18,7 @@ defineProps({
     },
 });
 
-const emit = defineEmits(["edit"]);
+const emit = defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -178,6 +178,7 @@ const emit = defineEmits(["edit"]);
                                     type="button"
                                     class="rounded-md p-2 text-slate-500 transition hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-800"
                                     title="Delete Transaction"
+                                    @click="emit('delete', transaction)"
                                 >
                                     <Delete02Icon :size="18" />
                                 </button>
